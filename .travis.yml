@@ -1,8 +1,7 @@
 language: php
 php:
   - 5.5
-  - 5.4
-  - hhvmw
+  - 5.4sss
 script: phpunit Test.php
 dw
 w
