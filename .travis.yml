@@ -4,4 +4,4 @@ php:
   - 5.4sss
 script: phpunit Test.php
 dw
-w
+waa
