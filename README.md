@@ -1,4 +1,4 @@
 # testjenkins
-Jenkins - changes to anyfiles in QA branch trigger pull request
+Jenkins - build trigger only on open and merge pull request
 readme
  we
