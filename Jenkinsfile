@@ -19,11 +19,7 @@ Graphs
 Settings
 pipeline-examples/jenkinsfile-examples/nodejs-build-test-deploy-docker-notify/Jenkinsfile
 54c8f61 on 30 Aug
-@ArtikUA ArtikUA Update Jenkinsfile
-@MikeCaspar
-@patoi
-@ArtikUA
-@andrask
+
 90 lines (59 sloc) 2.43 KB
 #!groovy
 
@@ -48,37 +44,20 @@ THE SOFTWARE.
 */
 
 node('node') {
-
     currentBuild.result = "SUCCESS"
-
     try {
 
        stage 'Checkout'
-
             checkout scm
-
        stage 'Test'
-
             env.NODE_ENV = "test"
-
             print "Environment will be : ${env.NODE_ENV}"
-
             sh 'node -v'
             sh 'npm prune'
             sh 'npm install'
             sh 'npm test'
-
        stage 'Build Docker'
-
             sh './dockerBuild.sh'
-
-       stage 'Deploy'
-
-            echo 'Push to Repo'
-            sh './dockerPushToRepo.sh'
-
-            echo 'ssh to web server and tell it to pull new image'
-            sh 'ssh deploy@xxxxx.xxxxx.com running/xxxxxxx/dockerRun.sh'
 
        stage 'Cleanup'
 
@@ -87,28 +66,22 @@ node('node') {
             sh 'rm node_modules -rf'
 
             mail body: 'project build successful',
-                        from: 'xxxx@yyyyy.com',
-                        replyTo: 'xxxx@yyyy.com',
+                        from: 'shilpa.nimbalkar@britishgas.co.uk',
+                        replyTo: 'shilpa.nimbalkar@britishgas.co.uk',
                         subject: 'project build successful',
-                        to: 'yyyyy@yyyy.com'
-
+                        to: 'shilpa.nimbalkar@britishgas.co.uk'
         }
 
-
     catch (err) {
-
         currentBuild.result = "FAILURE"
-
             mail body: "project build error is here: ${env.BUILD_URL}" ,
-            from: 'xxxx@yyyy.com',
-            replyTo: 'yyyy@yyyy.com',
+            from: 'shilpa.nimbalkar@britishgas.co.uk',
+            replyTo: 'shilpa.nimbalkar@britishgas.co.uk',
             subject: 'project build failed',
-            to: 'zzzz@yyyyy.com'
-
+            to: 'shilpa.nimbalkar@britishgas.co.uk'
         throw err
     }
 
 }
-
     Contact GitHub API Training Shop Blog About 
     © 2016 GitHub, Inc. Terms Privacy Security Status Help 
